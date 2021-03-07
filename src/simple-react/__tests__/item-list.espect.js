@@ -1,3 +1,5 @@
+import {render} from '@testing-library/react'
+import ItemList from '../item-list'
 // Your job:
 // Test the case where the items provided is empty:
 //   <ItemList items={[]} />
@@ -18,7 +20,9 @@
 
 // and here's an outline example of your first test:
 //   Create a "container" to render your component into (tip: use document.createElement('div'))
-//
+  it('should render tht title', () => {
+    const {container} = render(<ItemList />)
+  })
 //   Render your component (tip: use ReactDOM.render(JSX, container))
 //
 //   Make your assertion(s) on the textContent of the container
@@ -36,7 +40,7 @@
 /*
 http://ws.kcd.im/?ws=Testing&e=basic%20react%20test&em=
 */
-test.skip('I submitted my elaboration and feedback', () => {
+test.skipz('I submitted my elaboration and feedback', () => {
   const submitted = false // change this when you've submitted!
   expect(submitted).toBe(true)
 })
