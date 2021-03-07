@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { CustomerForm } from './CustomerForm';
+import ReactTestUtils from 'react-dom/test-utils';
 
 describe('CustomerForm', () => {
 	let content;
@@ -47,5 +48,15 @@ describe('CustomerForm', () => {
   it('assigns anid that matches the label id to the first name field', () => {
     const { container } = render(<CustomerForm/>)
     expect(firstNameField(container).id).toEqual('firstName')
+  })
+
+  it('saves existing fist name when submitted', async () => {
+    const assertion = 'Bernardo'
+    const { container } = render(<CustomerForm 
+      firstName={assertion}
+      onSubmit={({firstName}) => expect(firstName).toEqual(assertion)}
+    />)
+    fireEvent.submit(form('customer', container))
+    expect.hasAssertions()
   })
 });
