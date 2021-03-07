@@ -1,5 +1,6 @@
 export const CustomerForm = ({ firstName }) => (
   <form id="customer" >
-    <input type="text" name="firstName" value={firstName} />
+    <label htmlFor="firstName">First name</label>
+    <input id='firstName' type="text" name="firstName" value={firstName} readonly/>
   </form>
 )
