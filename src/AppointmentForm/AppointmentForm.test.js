@@ -52,7 +52,7 @@ describe('AppointmentForm', () => {
 			);
 		});
 
-		it('pre.selects hte exiting value', () => {
+		it('pre.selects the exiting value', () => {
 			const services = ['cut', 'Blow-dry'];
 
 			const { container } = render(
@@ -62,6 +62,15 @@ describe('AppointmentForm', () => {
 			const option = findOption(field('service', container), 'Blow-dry');
 
 			expect(option.selected).toBeTruthy();
+		});
+
+		it('should render a label for selected element', () => {
+			const { container } = render(<AppointmentForm service='Blow-dry' />);
+
+			const Label = container.querySelector('label[for="service"]') 
+
+			expect(Label).not.toBeNull()
+			expect(Label.textContent).toEqual('Service:')
 		});
 	});
 });
