@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppointmentForm } from './AppointmentForm';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 describe('AppointmentForm', () => {
 	const form = (id, container) => container.querySelector(`form[id="${id}"]`);
@@ -67,19 +67,40 @@ describe('AppointmentForm', () => {
 		it('should render a label for selected element', () => {
 			const { container } = render(<AppointmentForm service='Blow-dry' />);
 
-			const Label = container.querySelector('label[for="service"]') 
+			const Label = container.querySelector('label[for="service"]');
 
-			expect(Label).not.toBeNull()
-			expect(Label.textContent).toEqual('Service:')
+			expect(Label).not.toBeNull();
+			expect(Label.textContent).toEqual('Service:');
 		});
 
-		it('Assigns an ID that matches the label ID', () =>{
-			const { container } = render(<AppointmentForm service='Blow-dry' label='some-id'/>);
+		it('Assigns an ID that matches the label ID', () => {
+			const { container } = render(
+				<AppointmentForm service='Blow-dry' label='some-id' />,
+			);
 
-			const Label = container.querySelector('label[id="some-id"]') 
+			const Label = container.querySelector('label[id="some-id"]');
 
-			expect(Label).not.toBeNull()
-			expect(Label.textContent).toEqual('Service:')
-		})
+			expect(Label).not.toBeNull();
+			expect(Label.textContent).toEqual('Service:');
+		});
+
+		it('Saves existing value when submitted', async () => {
+			const { container } = render(
+				<AppointmentForm
+					service='Blow-dry'
+					onSubmit={({ service }) =>
+						expect(service).toBe()
+					}
+				/>,
+			);
+
+			fireEvent.change(container.querySelector('select[name="service"]'), {
+				target: { value: 'Blow-dry' },
+			});
+
+			fireEvent.submit(form('appointment', container))
+
+			expect.hasAssertions();
+		});
 	});
 });
