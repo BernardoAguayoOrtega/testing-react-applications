@@ -72,5 +72,14 @@ describe('AppointmentForm', () => {
 			expect(Label).not.toBeNull()
 			expect(Label.textContent).toEqual('Service:')
 		});
+
+		it('Assigns an ID that matches the label ID', () =>{
+			const { container } = render(<AppointmentForm service='Blow-dry' label='some-id'/>);
+
+			const Label = container.querySelector('label[id="some-id"]') 
+
+			expect(Label).not.toBeNull()
+			expect(Label.textContent).toEqual('Service:')
+		})
 	});
 });
